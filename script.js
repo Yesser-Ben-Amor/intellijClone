@@ -1333,24 +1333,32 @@ features.forEach((feature, index) => {
     }
     
     applySyntaxColors(content, fileType) {
-        // Für jetzt verwenden wir eine einfache Lösung
-        // Echtes Syntax Highlighting würde eine komplexere Implementierung benötigen
-        // wie CodeMirror oder Monaco Editor
-        
         const editor = document.getElementById('code-editor');
         
-        // Setze verschiedene Farben basierend auf Dateityp
+        console.log('Applying syntax colors for file type:', fileType);
+        
+        // Entferne alle bestehenden CSS-Klassen
+        editor.classList.remove('syntax-java', 'syntax-javascript', 'syntax-html', 'syntax-css');
+        
+        // Setze verschiedene Farben basierend auf Dateityp mit !important
         if (fileType === 'java') {
-            editor.style.color = '#cc7832'; // Java orange
+            editor.style.setProperty('color', '#cc7832', 'important'); // Java orange
+            console.log('Set Java color: #cc7832');
         } else if (fileType === 'javascript') {
-            editor.style.color = '#569cd6'; // JS blau
+            editor.style.setProperty('color', '#569cd6', 'important'); // JS blau
+            console.log('Set JavaScript color: #569cd6');
         } else if (fileType === 'html') {
-            editor.style.color = '#92c5f7'; // HTML hellblau
+            editor.style.setProperty('color', '#92c5f7', 'important'); // HTML hellblau
+            console.log('Set HTML color: #92c5f7');
         } else if (fileType === 'css') {
-            editor.style.color = '#9cdcfe'; // CSS cyan
+            editor.style.setProperty('color', '#9cdcfe', 'important'); // CSS cyan
+            console.log('Set CSS color: #9cdcfe');
         } else {
-            editor.style.color = '#a9b7c6'; // Standard grau
+            editor.style.setProperty('color', '#a9b7c6', 'important'); // Standard grau
+            console.log('Set default color: #a9b7c6');
         }
+        
+        console.log('Current editor color:', window.getComputedStyle(editor).color);
     }
     
     getFileType(filename) {
