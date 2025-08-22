@@ -1327,10 +1327,167 @@ features.forEach((feature, index) => {
             fileTypeElement.textContent = this.getFileTypeDisplayName(fileType);
         }
         
-        // Simple syntax highlighting for better UX
-        // Note: This is basic highlighting for demonstration
-        // A full implementation would use a proper syntax highlighter
+        // Apply syntax highlighting
         this.updateEditorStyling(fileType);
+        this.applySyntaxColors(content, fileType);
+    }
+    
+    applySyntaxColors(content, fileType) {
+        const editorContainer = document.querySelector('.editor-container');
+        
+        // Remove existing overlay
+        const existingOverlay = editorContainer.querySelector('.syntax-overlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+        
+        // Create syntax overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'syntax-overlay';
+        
+        let highlightedContent = '';
+        
+        if (fileType === 'java') {
+            highlightedContent = this.highlightJava(content);
+        } else if (fileType === 'javascript') {
+            highlightedContent = this.highlightJavaScript(content);
+        } else if (fileType === 'html') {
+            highlightedContent = this.highlightHTML(content);
+        } else if (fileType === 'css') {
+            highlightedContent = this.highlightCSS(content);
+        } else {
+            highlightedContent = this.escapeHtml(content);
+        }
+        
+        overlay.innerHTML = highlightedContent;
+        editorContainer.appendChild(overlay);
+        
+        // Make editor text transparent for overlay to show
+        const editor = document.getElementById('code-editor');
+        editor.classList.add('syntax-highlight');
+    }
+    
+    highlightJava(content) {
+        const javaKeywords = [
+            'abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char',
+            'class', 'const', 'continue', 'default', 'do', 'double', 'else', 'enum',
+            'extends', 'final', 'finally', 'float', 'for', 'goto', 'if', 'implements',
+            'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'package',
+            'private', 'protected', 'public', 'return', 'short', 'static', 'strictfp',
+            'super', 'switch', 'synchronized', 'this', 'throw', 'throws', 'transient',
+            'try', 'void', 'volatile', 'while', 'true', 'false', 'null'
+        ];
+        
+        const javaTypes = [
+            'String', 'Integer', 'Boolean', 'Double', 'Float', 'Long', 'Short', 'Byte',
+            'Character', 'Object', 'System', 'Math', 'Scanner', 'ArrayList', 'HashMap'
+        ];
+        
+        let highlighted = this.escapeHtml(content);
+        
+        // Highlight comments
+        highlighted = highlighted.replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>');
+        highlighted = highlighted.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>');
+        
+        // Highlight strings
+        highlighted = highlighted.replace(/(".*?"|'.*?')/g, '<span class="string">$1</span>');
+        
+        // Highlight numbers
+        highlighted = highlighted.replace(/\b(\d+\.?\d*)\b/g, '<span class="number">$1</span>');
+        
+        // Highlight annotations
+        highlighted = highlighted.replace(/(@\w+)/g, '<span class="annotation">$1</span>');
+        
+        // Highlight keywords
+        javaKeywords.forEach(keyword => {
+            const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+            highlighted = highlighted.replace(regex, `<span class="keyword">${keyword}</span>`);
+        });
+        
+        // Highlight types
+        javaTypes.forEach(type => {
+            const regex = new RegExp(`\\b${type}\\b`, 'g');
+            highlighted = highlighted.replace(regex, `<span class="type">${type}</span>`);
+        });
+        
+        // Highlight method calls
+        highlighted = highlighted.replace(/(\w+)(?=\s*\()/g, '<span class="method">$1</span>');
+        
+        return highlighted;
+    }
+    
+    highlightJavaScript(content) {
+        const jsKeywords = [
+            'abstract', 'arguments', 'await', 'boolean', 'break', 'byte', 'case', 'catch',
+            'char', 'class', 'const', 'continue', 'debugger', 'default', 'delete', 'do',
+            'double', 'else', 'enum', 'eval', 'export', 'extends', 'false', 'final',
+            'finally', 'float', 'for', 'function', 'goto', 'if', 'implements', 'import',
+            'in', 'instanceof', 'int', 'interface', 'let', 'long', 'native', 'new',
+            'null', 'package', 'private', 'protected', 'public', 'return', 'short',
+            'static', 'super', 'switch', 'synchronized', 'this', 'throw', 'throws',
+            'transient', 'true', 'try', 'typeof', 'var', 'void', 'volatile', 'while',
+            'with', 'yield'
+        ];
+        
+        let highlighted = this.escapeHtml(content);
+        
+        // Highlight comments
+        highlighted = highlighted.replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>');
+        highlighted = highlighted.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>');
+        
+        // Highlight strings
+        highlighted = highlighted.replace(/(".*?"|'.*?'|`.*?`)/g, '<span class="string">$1</span>');
+        
+        // Highlight numbers
+        highlighted = highlighted.replace(/\b(\d+\.?\d*)\b/g, '<span class="number">$1</span>');
+        
+        // Highlight keywords
+        jsKeywords.forEach(keyword => {
+            const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+            highlighted = highlighted.replace(regex, `<span class="keyword">${keyword}</span>`);
+        });
+        
+        // Highlight function calls
+        highlighted = highlighted.replace(/(\w+)(?=\s*\()/g, '<span class="function">$1</span>');
+        
+        return highlighted;
+    }
+    
+    highlightHTML(content) {
+        let highlighted = this.escapeHtml(content);
+        
+        // Highlight HTML tags
+        highlighted = highlighted.replace(/(&lt;\/?\w+)/g, '<span class="tag">$1</span>');
+        highlighted = highlighted.replace(/(&gt;)/g, '<span class="tag">$1</span>');
+        
+        // Highlight attributes
+        highlighted = highlighted.replace(/(\w+)(?==)/g, '<span class="attribute">$1</span>');
+        
+        // Highlight attribute values
+        highlighted = highlighted.replace(/(=".*?")/g, '<span class="attribute-value">$1</span>');
+        
+        return highlighted;
+    }
+    
+    highlightCSS(content) {
+        let highlighted = this.escapeHtml(content);
+        
+        // Highlight selectors
+        highlighted = highlighted.replace(/^([^{]+)(?={)/gm, '<span class="selector">$1</span>');
+        
+        // Highlight properties
+        highlighted = highlighted.replace(/(\w+)(?=:)/g, '<span class="property">$1</span>');
+        
+        // Highlight values
+        highlighted = highlighted.replace(/(:)(.*?)(;)/g, '$1<span class="value">$2</span>$3');
+        
+        return highlighted;
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
     
     getFileType(filename) {
@@ -1414,6 +1571,12 @@ features.forEach((feature, index) => {
         // Update file content
         if (this.currentFile) {
             this.fileContents.set(this.currentFile, e.target.value);
+            
+            // Update syntax highlighting
+            clearTimeout(this.syntaxTimeout);
+            this.syntaxTimeout = setTimeout(() => {
+                this.applySyntaxHighlighting();
+            }, 300);
             
             // Auto-save to project
             clearTimeout(this.autoSaveTimeout);

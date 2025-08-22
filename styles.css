@@ -932,6 +932,118 @@ body {
     font-size: 11px;
 }
 
+/* Syntax Highlighting */
+.syntax-highlight {
+    position: relative;
+    background: transparent;
+    color: transparent;
+    caret-color: #a9b7c6;
+    z-index: 1;
+}
+
+.syntax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Java Syntax Colors */
+.keyword {
+    color: #cc7832;
+    font-weight: bold;
+}
+
+.string {
+    color: #6a8759;
+}
+
+.comment {
+    color: #808080;
+    font-style: italic;
+}
+
+.number {
+    color: #6897bb;
+}
+
+.type {
+    color: #ffc66d;
+}
+
+.method {
+    color: #ffc66d;
+}
+
+.annotation {
+    color: #bbb529;
+}
+
+.operator {
+    color: #a9b7c6;
+}
+
+.bracket {
+    color: #a9b7c6;
+}
+
+.variable {
+    color: #a9b7c6;
+}
+
+/* JavaScript Syntax Colors */
+.syntax-javascript .keyword {
+    color: #569cd6;
+}
+
+.syntax-javascript .string {
+    color: #ce9178;
+}
+
+.syntax-javascript .comment {
+    color: #6a9955;
+}
+
+.syntax-javascript .function {
+    color: #dcdcaa;
+}
+
+/* HTML Syntax Colors */
+.syntax-html .tag {
+    color: #569cd6;
+}
+
+.syntax-html .attribute {
+    color: #92c5f7;
+}
+
+.syntax-html .attribute-value {
+    color: #ce9178;
+}
+
+/* CSS Syntax Colors */
+.syntax-css .property {
+    color: #9cdcfe;
+}
+
+.syntax-css .value {
+    color: #ce9178;
+}
+
+.syntax-css .selector {
+    color: #d7ba7d;
+}
+
 /* Responsive Console */
 @media (max-height: 600px) {
     .console-panel {
