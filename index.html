@@ -113,6 +113,45 @@
             </div>
         </div>
 
+        <!-- Console Panel -->
+        <div class="console-panel" id="console-panel">
+            <div class="console-header">
+                <div class="console-tabs">
+                    <button class="console-tab active" data-tab="output">🖥️ Output</button>
+                    <button class="console-tab" data-tab="terminal">⚡ Terminal</button>
+                    <button class="console-tab" data-tab="problems">⚠️ Problems</button>
+                </div>
+                <div class="console-actions">
+                    <button class="console-btn" id="run-code-btn" title="Code ausführen (F5)">▶️ Run</button>
+                    <button class="console-btn" id="clear-console-btn" title="Console leeren">🗑️</button>
+                    <button class="console-btn" id="toggle-console-btn" title="Console ein-/ausblenden">📋</button>
+                </div>
+            </div>
+            <div class="console-content">
+                <div class="console-tab-content active" id="output-content">
+                    <div class="console-output" id="console-output">
+                        <div class="console-line welcome">🚀 IntelliJ Clone Console - Bereit für Code-Ausführung!</div>
+                        <div class="console-line info">💡 Tipp: Drücke F5 oder klicke 'Run' um deinen Code auszuführen</div>
+                    </div>
+                </div>
+                <div class="console-tab-content" id="terminal-content">
+                    <div class="terminal-output" id="terminal-output">
+                        <div class="terminal-line">$ Willkommen im Terminal</div>
+                        <div class="terminal-line">$ Gib 'help' ein für verfügbare Befehle</div>
+                    </div>
+                    <div class="terminal-input-container">
+                        <span class="terminal-prompt">$ </span>
+                        <input type="text" class="terminal-input" id="terminal-input" placeholder="Befehl eingeben...">
+                    </div>
+                </div>
+                <div class="console-tab-content" id="problems-content">
+                    <div class="problems-list" id="problems-list">
+                        <div class="no-problems">✅ Keine Probleme gefunden</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Status Bar -->
         <div class="status-bar">
             <div class="status-left">
