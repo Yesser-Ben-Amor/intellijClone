@@ -7,6 +7,12 @@
 
 Ein moderner, vollständiger Code-Editor inspiriert von IntelliJ IDEA, komplett mit Vanilla JavaScript entwickelt. Keine Frameworks, keine Dependencies - nur pure Web-Technologien!
 
+## 🚀 Live Demo
+
+**[➡️ Jetzt ausprobieren!](https://yesser-ben-amor.github.io/intellijClone/)**
+
+> Die Live-Demo läuft direkt in deinem Browser - keine Installation nötig!
+
 ## 📸 Screenshots
 
 > *Screenshots werden bald hinzugefügt*
