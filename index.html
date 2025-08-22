@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliJ Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="ide-container">
+        <!-- Menu Bar -->
+        <div class="menu-bar">
+            <div class="menu-items">
+                <div class="menu-item">
+                    <span>Datei</span>
+                    <div class="dropdown">
+                        <div class="dropdown-item" data-action="new-project">Neues Projekt <span class="shortcut">Ctrl+Shift+N</span></div>
+                        <div class="dropdown-item" data-action="open-project">Projekt öffnen</div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" data-action="new-file">Neue Datei <span class="shortcut">Ctrl+N</span></div>
+                        <div class="dropdown-item" data-action="open-file">Datei öffnen <span class="shortcut">Ctrl+O</span></div>
+                        <div class="dropdown-item" data-action="save-file">Speichern <span class="shortcut">Ctrl+S</span></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" data-action="close-tab">Schließen <span class="shortcut">Ctrl+W</span></div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <span>Bearbeiten</span>
+                    <div class="dropdown">
+                        <div class="dropdown-item" data-action="undo">Rückgängig <span class="shortcut">Ctrl+Z</span></div>
+                        <div class="dropdown-item" data-action="redo">Wiederholen <span class="shortcut">Ctrl+Y</span></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" data-action="find">Suchen <span class="shortcut">Ctrl+F</span></div>
+                        <div class="dropdown-item" data-action="replace">Ersetzen <span class="shortcut">Ctrl+H</span></div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <span>Ansicht</span>
+                    <div class="dropdown">
+                        <div class="dropdown-item" data-action="toggle-sidebar">Seitenleiste umschalten</div>
+                        <div class="dropdown-item" data-action="toggle-theme">Theme wechseln</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="project-info">
+                        <h3 id="project-name">Willkommen</h3>
+                        <span class="project-path" id="project-path">Kein Projekt geöffnet</span>
+                    </div>
+                    <div class="sidebar-actions">
+                        <button class="btn-icon" id="new-project-btn" title="Neues Projekt">📁</button>
+                        <button class="btn-icon" id="new-file-btn" title="Neue Datei">+</button>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="project-btn" id="open-project-btn">Projekt öffnen</button>
+                    <button class="project-btn preview-btn" id="live-preview-btn">
+                        <span class="icon">🌐</span>
+                        Live Preview
+                    </button>
+                    <button class="project-btn" id="create-project-btn">
+                        <span class="project-icon">➕</span>
+                        Neues Projekt
+                    </button>
+                    <button class="project-btn" id="import-project-btn">
+                        <span class="project-icon">📁</span>
+                        Projekt importieren
+                    </button>
+                    <input type="file" id="import-file-input" webkitdirectory directory multiple style="display: none;" accept="*/*">
+                </div>
+                <div class="file-tree" id="file-tree">
+                    <div class="file-item" data-type="file" data-name="welcome.js">
+                        <span class="file-icon">📄</span>
+                        <span class="file-name">welcome.js</span>
+                    </div>
+                    <div class="file-item" data-type="file" data-name="styles.css">
+                        <span class="file-icon">🎨</span>
+                        <span class="file-name">styles.css</span>
+                    </div>
+                    <div class="file-item" data-type="file" data-name="index.html">
+                        <span class="file-icon">🌐</span>
+                        <span class="file-name">index.html</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="editor-area">
+                <div class="tab-bar" id="tab-bar">
+                    <!-- Tabs werden hier dynamisch hinzugefügt -->
+                </div>
+                <div class="editor-container">
+                    <div class="line-numbers" id="line-numbers"></div>
+                    <textarea id="code-editor" placeholder="Beginne mit dem Programmieren..."></textarea>
+                </div>
+                
+                <!-- Search Bar (hidden by default) -->
+                <div class="search-bar" id="search-bar" style="display: none;">
+                    <input type="text" id="search-input" placeholder="Suchen...">
+                    <button id="search-prev">↑</button>
+                    <button id="search-next">↓</button>
+                    <button id="search-close">×</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <span id="cursor-position">Zeile 1, Spalte 1</span>
+                <span class="separator">|</span>
+                <span id="file-type">JavaScript</span>
+            </div>
+            <div class="status-right">
+                <span id="encoding">UTF-8</span>
+                <span class="separator">|</span>
+                <span id="line-ending">LF</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Input (hidden) -->
+    <input type="file" id="file-input" style="display: none;" accept=".js,.html,.css,.txt,.json,.md">
+
+    <!-- Project Creation Modal -->
+    <div class="modal-overlay" id="project-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Neues Projekt erstellen</h2>
+                <button class="modal-close" id="close-project-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="project-name-input">Projektname:</label>
+                    <input type="text" id="project-name-input" placeholder="MeinProjekt" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="project-type">Projekttyp:</label>
+                    <select id="project-type" required>
+                        <option value="javascript">JavaScript</option>
+                        <option value="html">HTML/CSS</option>
+                        <option value="fullstack">Fullstack (HTML/JS + Spring Boot)</option>
+                        <option value="react">React</option>
+                        <option value="nodejs">Node.js</option>
+                        <option value="empty">Leer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Beschreibung (optional):</label>
+                    <textarea id="project-description" placeholder="Projektbeschreibung..." class="form-textarea"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-project">Abbrechen</button>
+                <button class="btn-primary" id="create-project">Projekt erstellen</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="project-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

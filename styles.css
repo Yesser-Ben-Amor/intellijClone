@@ -1,0 +1,675 @@
+/* IntelliJ Clone Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2b2b2b;
+    color: #a9b7c6;
+    overflow: hidden;
+}
+
+.ide-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Menu Bar */
+.menu-bar {
+    background-color: #3c3f41;
+    border-bottom: 1px solid #555;
+    padding: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-items {
+    display: flex;
+}
+
+.menu-item {
+    position: relative;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #4c5052;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #3c3f41;
+    border: 1px solid #555;
+    border-radius: 4px;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1000;
+}
+
+.menu-item:hover .dropdown {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.dropdown-item:hover {
+    background-color: #4c5052;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #555;
+    margin: 4px 0;
+}
+
+.shortcut {
+    color: #808080;
+    font-size: 12px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #3c3f41;
+    border-right: 1px solid #555;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #a9b7c6;
+    margin: 0;
+}
+
+.project-path {
+    font-size: 11px;
+    color: #808080;
+    display: block;
+    margin-top: 2px;
+}
+
+.sidebar-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: #a9b7c6;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: #4c5052;
+}
+
+/* Project Action Buttons */
+.project-actions {
+    padding: 8px 16px;
+    border-bottom: 1px solid #555;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.project-btn {
+    background-color: #365880;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+    text-align: center;
+}
+
+.project-btn:hover {
+    background: #4a5568;
+    transform: translateY(-1px);
+}
+
+.preview-btn {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+}
+
+.preview-btn:hover {
+    background: linear-gradient(135deg, #38a169, #2f855a);
+}
+
+.export-btn {
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+}
+
+.export-btn:hover {
+    background: linear-gradient(135deg, #dd6b20, #c05621);
+}
+
+.project-btn .icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+
+
+.project-btn:active {
+    background-color: #2d4a6b;
+}
+
+.file-tree {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 13px;
+}
+
+.file-item:hover {
+    background-color: #4c5052;
+}
+
+.file-item.active {
+    background-color: #365880;
+    color: #ffffff;
+}
+
+.file-icon {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.file-name {
+    flex: 1;
+}
+
+/* Welcome and Empty States */
+.welcome-message, .empty-project {
+    padding: 20px;
+    text-align: center;
+    color: #a9b7c6;
+}
+
+.welcome-message h3 {
+    margin-bottom: 16px;
+    color: #a9b7c6;
+}
+
+.welcome-message p {
+    margin-bottom: 20px;
+    color: #808080;
+    line-height: 1.5;
+}
+
+.empty-project p {
+    color: #808080;
+    margin-bottom: 8px;
+}
+
+/* Editor Area */
+.editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Tab Bar */
+.tab-bar {
+    background-color: #2b2b2b;
+    border-bottom: 1px solid #555;
+    display: flex;
+    overflow-x: auto;
+    min-height: 32px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #3c3f41;
+    border-right: 1px solid #555;
+    cursor: pointer;
+    font-size: 13px;
+    min-width: 120px;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.tab:hover {
+    background-color: #4c5052;
+}
+
+.tab.active {
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.tab-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tab-close {
+    background: none;
+    border: none;
+    color: #808080;
+    cursor: pointer;
+    margin-left: 8px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.tab-close:hover {
+    background-color: #555;
+    color: #ffffff;
+}
+
+/* Editor Container */
+.editor-container {
+    flex: 1;
+    display: flex;
+    background-color: #2b2b2b;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.line-numbers {
+    background-color: #313335;
+    border-right: 1px solid #555;
+    padding: 16px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #606366;
+    user-select: none;
+    min-width: 50px;
+    text-align: right;
+}
+
+.line-number {
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#code-editor {
+    flex: 1;
+    background-color: #2b2b2b;
+    color: #a9b7c6;
+    border: none;
+    outline: none;
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    tab-size: 4;
+    min-height: 100%;
+}
+
+#code-editor::placeholder {
+    color: #606366;
+}
+
+/* Search Bar */
+.search-bar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #3c3f41;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+#search-input {
+    background-color: #2b2b2b;
+    border: 1px solid #555;
+    border-radius: 3px;
+    padding: 4px 8px;
+    color: #a9b7c6;
+    font-size: 13px;
+    width: 200px;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #365880;
+}
+
+.search-bar button {
+    background-color: #4c5052;
+    border: none;
+    color: #a9b7c6;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.search-bar button:hover {
+    background-color: #555;
+}
+
+/* Status Bar */
+.status-bar {
+    background-color: #3c3f41;
+    border-top: 1px solid #555;
+    padding: 4px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    height: 24px;
+}
+
+.status-left, .status-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.separator {
+    color: #606366;
+}
+
+/* Syntax Highlighting */
+.keyword {
+    color: #cc7832;
+}
+
+.string {
+    color: #6a8759;
+}
+
+.comment {
+    color: #808080;
+    font-style: italic;
+}
+
+.number {
+    color: #6897bb;
+}
+
+.function {
+    color: #ffc66d;
+}
+
+.variable {
+    color: #a9b7c6;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #2b2b2b;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    .menu-item {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .code-editor {
+        font-size: 13px;
+    }
+    
+    .modal {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .project-actions {
+        flex-direction: row;
+    }
+    
+    .project-btn {
+        flex: 1;
+        font-size: 11px;
+    }
+}
+
+/* Animation for smooth transitions */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal {
+    background-color: #3c3f41;
+    border: 1px solid #555;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #a9b7c6;
+    font-weight: 500;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #808080;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.modal-close:hover {
+    background-color: #555;
+    color: #ffffff;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #a9b7c6;
+    font-weight: 500;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    background-color: #2b2b2b;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #a9b7c6;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #365880;
+    box-shadow: 0 0 0 2px rgba(54, 88, 128, 0.2);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 60px;
+    max-height: 120px;
+}
+
+.modal-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #555;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #365880;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #4a6fa5;
+}
+
+.btn-primary:active {
+    background-color: #2d4a6b;
+}
+
+.btn-secondary {
+    background-color: #4c5052;
+    color: #a9b7c6;
+}
+
+.btn-secondary:hover {
+    background-color: #555;
+}
+
+.btn-secondary:active {
+    background-color: #404040;
+}
