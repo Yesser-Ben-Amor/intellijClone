@@ -160,6 +160,105 @@ Dies ist ein HTML/CSS/JavaScript Web-Projekt.
 `
                 }
             },
+            'java': {
+                name: 'Java',
+                description: 'Java-Projekt mit Main-Klasse',
+                files: {
+                    'Main.java': `// {{PROJECT_NAME}} - Hauptklasse
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Willkommen bei {{PROJECT_NAME}}!");
+        System.out.println("{{DESCRIPTION}}");
+        
+        // Beispiel-Code
+        String projectName = "{{PROJECT_NAME}}";
+        System.out.println("Projekt: " + projectName);
+        
+        // Einfache Berechnungen
+        int a = 10;
+        int b = 20;
+        int sum = a + b;
+        System.out.println("Summe von " + a + " + " + b + " = " + sum);
+        
+        // Array-Beispiel
+        String[] languages = {"Java", "Python", "JavaScript", "C++"};
+        System.out.println("\\nUnterstützte Sprachen:");
+        for (String lang : languages) {
+            System.out.println("- " + lang);
+        }
+    }
+}`,
+                    'Utils.java': `// {{PROJECT_NAME}} - Utility-Klasse
+public class Utils {
+    
+    /**
+     * Berechnet die Fakultät einer Zahl
+     * @param n Die Zahl
+     * @return Fakultät von n
+     */
+    public static long factorial(int n) {
+        if (n <= 1) {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+    
+    /**
+     * Prüft ob eine Zahl eine Primzahl ist
+     * @param n Die zu prüfende Zahl
+     * @return true wenn Primzahl, false sonst
+     */
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Gibt eine formatierte Begrüßung zurück
+     * @param name Der Name
+     * @return Begrüßungstext
+     */
+    public static String greet(String name) {
+        return "Hallo " + name + "! Willkommen in der Java-Welt!";
+    }
+}`,
+                    'README.md': `# {{PROJECT_NAME}}
+
+{{DESCRIPTION}}
+
+## Kompilierung und Ausführung
+
+\`\`\`bash
+# Kompilieren
+javac *.java
+
+# Ausführen
+java Main
+\`\`\`
+
+## Projektstruktur
+
+- \`Main.java\` - Hauptklasse mit main-Methode
+- \`Utils.java\` - Utility-Funktionen
+
+## Features
+
+- Grundlegende Java-Syntax
+- Klassen und Methoden
+- Arrays und Schleifen
+- Rekursion (Fakultät)
+- Algorithmen (Primzahltest)
+`
+                }
+            },
             'fullstack': {
                 name: 'Fullstack (HTML/JS + Spring Boot)',
                 description: 'Vollständiges Fullstack-Projekt mit Frontend und Backend',
