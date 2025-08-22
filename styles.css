@@ -932,30 +932,21 @@ body {
     font-size: 11px;
 }
 
-/* Syntax Highlighting */
-.syntax-highlight {
-    position: relative;
-    background: transparent;
-    color: transparent;
-    caret-color: #a9b7c6;
-    z-index: 1;
+/* Syntax Highlighting - Simplified */
+.syntax-java {
+    color: #a9b7c6 !important;
 }
 
-.syntax-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 12px;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
+.syntax-javascript {
+    color: #a9b7c6 !important;
+}
+
+.syntax-html {
+    color: #a9b7c6 !important;
+}
+
+.syntax-css {
+    color: #a9b7c6 !important;
 }
 
 /* Java Syntax Colors */
