@@ -1317,9 +1317,94 @@ features.forEach((feature, index) => {
     }
     
     applySyntaxHighlighting() {
-        // Basic syntax highlighting would go here
-        // For now, we'll keep it simple since implementing full syntax highlighting
-        // in vanilla JS would be quite complex
+        const editor = document.getElementById('code-editor');
+        const content = editor.value;
+        const fileType = this.getFileType(this.currentFile || 'untitled.txt');
+        
+        // Update file type in status bar
+        const fileTypeElement = document.getElementById('file-type');
+        if (fileTypeElement) {
+            fileTypeElement.textContent = this.getFileTypeDisplayName(fileType);
+        }
+        
+        // Simple syntax highlighting for better UX
+        // Note: This is basic highlighting for demonstration
+        // A full implementation would use a proper syntax highlighter
+        this.updateEditorStyling(fileType);
+    }
+    
+    getFileType(filename) {
+        const extension = filename.split('.').pop().toLowerCase();
+        const typeMap = {
+            'java': 'java',
+            'js': 'javascript',
+            'javascript': 'javascript',
+            'html': 'html',
+            'htm': 'html',
+            'css': 'css',
+            'json': 'json',
+            'md': 'markdown',
+            'txt': 'text',
+            'py': 'python',
+            'cpp': 'cpp',
+            'c': 'c',
+            'h': 'c'
+        };
+        return typeMap[extension] || 'text';
+    }
+    
+    getFileTypeDisplayName(fileType) {
+        const displayNames = {
+            'java': 'Java',
+            'javascript': 'JavaScript',
+            'html': 'HTML',
+            'css': 'CSS',
+            'json': 'JSON',
+            'markdown': 'Markdown',
+            'python': 'Python',
+            'cpp': 'C++',
+            'c': 'C',
+            'text': 'Text'
+        };
+        return displayNames[fileType] || 'Text';
+    }
+    
+    updateEditorStyling(fileType) {
+        const editor = document.getElementById('code-editor');
+        
+        // Remove existing syntax classes
+        editor.classList.remove('syntax-java', 'syntax-javascript', 'syntax-html', 'syntax-css');
+        
+        // Add appropriate syntax class
+        if (fileType !== 'text') {
+            editor.classList.add(`syntax-${fileType}`);
+        }
+        
+        // Update tab icon based on file type
+        this.updateTabIcon(fileType);
+    }
+    
+    updateTabIcon(fileType) {
+        const activeTab = document.querySelector('.tab.active');
+        if (!activeTab) return;
+        
+        const iconElement = activeTab.querySelector('.tab-icon');
+        if (!iconElement) return;
+        
+        const icons = {
+            'java': '☕',
+            'javascript': '🟨',
+            'html': '🌐',
+            'css': '🎨',
+            'json': '📋',
+            'markdown': '📝',
+            'python': '🐍',
+            'cpp': '⚙️',
+            'c': '⚙️',
+            'text': '📄'
+        };
+        
+        iconElement.textContent = icons[fileType] || '📄';
     }
     
     handleCodeChange(e) {
